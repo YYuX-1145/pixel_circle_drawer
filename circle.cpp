@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 using namespace std;
-void print(int x)
+void print(short int x)
 {
     if (x&&x<=2)
         cout << "■" << " ";
@@ -18,10 +18,15 @@ int mian()
     int r,i,j;
     cout << "enter R : ";
     cin >> r;
-    int** matrix = new int* [r+1];
+    if (r < 0 || r >46340)
+    {
+        cout << "invalid input" << endl;
+        return 0;
+    }
+    short int** matrix = new short int* [r+1];
     for (int i = 0; i < r+1; i++)
     {
-        matrix[i] = new int[r+1];
+        matrix[i] = new short int[r+1];
         for (int j = 0; j < r+1; j++)
             matrix[i][j] = 0;
     }
@@ -79,9 +84,7 @@ int mian()
             print(matrix[i][j]);
         }
         cout << endl;
-    }
-
-    //sum
+    }    
     for (i = 1; i <= r; i++)
     {
         for (j = 0; j < r+1; j++)
@@ -94,6 +97,9 @@ int mian()
         }
         cout << endl;
     }
+
+
+    //sum
     int sum = 0;
     int a, b;
     for (i = 0; i <= r; i++)
