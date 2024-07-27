@@ -24,6 +24,7 @@ int mian()
     if (r < 0||r> 8192)//r > 46340)
     {
         cout << "invalid input" << endl;
+        system("pause");
         system("cls");
         return 0;
     }
