@@ -1,37 +1,40 @@
 ﻿#include <iostream>
 using namespace std;
-void print(short int x)
+class printer
 {
-    if (x&&x<=2)
-        cout << "■" << " ";
-    else if (x == 3)
+public:
+    string str="";
+    string lookup[4] = { "· ","■ ","■ ", "# "};
+    void add(short int x)
     {
-        cout << "#" << " ";
+        str += lookup[x];
     }
-    else
+    void print()
     {
-        cout << "·" << " ";
+        cout << str << endl;
+        str = "";
     }
-}
+};
 int mian()
 {
     int r,i,j;
+    printer printer;
     cout << "enter R : ";
     cin >> r;
-    if (r < 0 || r >46340)
+    if (r < 0||r> 8192)//r > 46340)
     {
         cout << "invalid input" << endl;
+        system("cls");
         return 0;
     }
     short int** matrix = new short int* [r+1];
-    for (int i = 0; i < r+1; i++)
+    for (i = 0; i < r+1; i++)
     {
         matrix[i] = new short int[r+1];
-        for (int j = 0; j < r+1; j++)
+        for (j = 0; j < r+1; j++)
             matrix[i][j] = 0;
     }
 
-    float y;
     for (int x = -r; x < 1; x++)
     {
         i = round(sqrt(r * r - x * x));
@@ -72,35 +75,39 @@ int mian()
     }
     cout << "" << endl;*/
 
+    if (r <= 4096)
+    {
+
     //图形
     for (i = r; i >=0; i--)
     {
         for (j = 0; j < r + 1; j++)
         {
-            print(matrix[i][j]);
+            printer.add(matrix[i][j]);
         }
         for (j = r-1; j >= 0; j--)
         {
-            print(matrix[i][j]);
+            printer.add(matrix[i][j]);
         }
-        cout << endl;
+        printer.print();
     }    
     for (i = 1; i <= r; i++)
     {
         for (j = 0; j < r+1; j++)
         {
-            print(matrix[i][j]);
+            printer.add(matrix[i][j]);
         }
         for (j = r-1; j >=0; j--)
         {
-            print(matrix[i][j]);
+            printer.add(matrix[i][j]);
         }
-        cout << endl;
+        printer.print();
     }
 
+    }
 
     //sum
-    int sum = 0;
+    long int sum = 0;
     int a, b;
     for (i = 0; i <= r; i++)
     {
